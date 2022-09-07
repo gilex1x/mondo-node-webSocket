@@ -1,0 +1,28 @@
+{
+  "name": "mongo-node",
+  "version": "0.0.0",
+  "description": "A simple chat with Nodejs",
+  "main": "server.js ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gilex1x/mondo-node-webSocket.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "mongo",
+    "socket"
+  ],
+  "author": "Gilberto Santamaria",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gilex1x/mondo-node-webSocket/issues"
+  },
+  "homepage": "https://github.com/gilex1x/mondo-node-webSocket#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1"
+  }
+}
