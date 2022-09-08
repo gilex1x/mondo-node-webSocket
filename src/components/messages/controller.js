@@ -1,5 +1,5 @@
 //functions and logic messgaes
-
+const store = require("./store");
 const createMessage = (user, message) => {
   return new Promise((resolve, reject) => {
     if (!user || !message) {
@@ -13,9 +13,14 @@ const createMessage = (user, message) => {
       date: new Date(),
     };
     console.log(fullMessage);
+    store.add(fullMessage);
     resolve(fullMessage);
   });
 };
-const editMessage = () => {};
+const getMessages = () => {
+  return new Promise((resolve, reject) => {
+    resolve(store.list());
+  });
+};
 
-module.exports = { createMessage, editMessage };
+module.exports = { createMessage, getMessages };

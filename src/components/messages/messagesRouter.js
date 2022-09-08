@@ -1,13 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const { createMessage, editMessage } = require("./controller");
+const { createMessage, getMessages } = require("./controller");
 const { success, error } = require("./messagesResponses");
 
 router.get("/", (req, res) => {
   res.header({
     "custom-header": "Valor personalizado",
   });
-  success(req, res, "Main route", 200);
+  getMessages()
+    .then((messageList) => {
+      success(req, res, messageList, 200);
+    })
+    .catch((err) => {
+      error(req, res, "Unexpected error", 500);
+    });
 });
 
 router.get("/message1", (req, res) => {
@@ -16,7 +22,7 @@ router.get("/message1", (req, res) => {
     message: `El mensaje:es ----, ha sido creado con exito`,
   });
 });
-router.post("/message1", (req, res) => {
+router.post("/", (req, res) => {
   const { user, message } = req.body;
   createMessage(user, message)
     .then((fullMessage) => {
