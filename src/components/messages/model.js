@@ -10,6 +10,6 @@ const messagesSchema = new Schema({
 
 //Model: Pasa los datos por el Schema  y lo guarda en la db
 
-const messagesModel = mongoose.model("Messages", messagesSchema);
+const messagesModel = mongoose.model("messagges", messagesSchema);
 
-module.exports = { messagesModel };
+module.exports = messagesModel;
