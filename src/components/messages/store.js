@@ -25,4 +25,11 @@ const getMessages = async () => {
   return allMessages;
 };
 
-module.exports = { add: addMessage, list: getMessages };
+const updateMessage = async (messageid, newTextMessage) => {
+  const foundMessage = await Model.findById(messageid);
+  foundMessage.message = newTextMessage;
+  const newMessage = await foundMessage.save();
+  return newMessage;
+};
+
+module.exports = { add: addMessage, list: getMessages, update: updateMessage };

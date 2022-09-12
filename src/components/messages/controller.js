@@ -23,4 +23,15 @@ const getMessages = () => {
   });
 };
 
-module.exports = { createMessage, getMessages };
+const updateMessage = (messageid, newTextMessage) => {
+  return new Promise(async (resolve, reject) => {
+    if (!messageid || !newTextMessage) {
+      reject("Incomplete data");
+      return false;
+    }
+    const result = await store.update(messageid, newTextMessage);
+    resolve(result);
+  });
+};
+
+module.exports = { createMessage, getMessages, updateMessage };
