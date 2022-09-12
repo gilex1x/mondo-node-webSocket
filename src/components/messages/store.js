@@ -20,8 +20,9 @@ const addMessage = (message) => {
   parsedMessage.save();
 };
 
-const getMessages = () => {
-  return messageList;
+const getMessages = async () => {
+  const allMessages = await Model.find(); //No params to get all messages
+  return allMessages;
 };
 
 module.exports = { add: addMessage, list: getMessages };
