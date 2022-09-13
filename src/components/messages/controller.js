@@ -36,4 +36,17 @@ const updateMessage = (messageid, newTextMessage) => {
   });
 };
 
-module.exports = { createMessage, getMessages, updateMessage };
+const deleteMessage = (messageid) => {
+  return new Promise(async (resolve, reject) => {
+    if (!messageid) {
+      reject("No id provided");
+      return false;
+    }
+    store
+      .delete(messageid)
+      .then(() => resolve())
+      .catch((err) => console.error(err));
+  });
+};
+
+module.exports = { createMessage, getMessages, updateMessage, deleteMessage };

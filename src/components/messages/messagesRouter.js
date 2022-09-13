@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { createMessage, getMessages, updateMessage } = require("./controller");
+const {
+  createMessage,
+  getMessages,
+  updateMessage,
+  deleteMessage,
+} = require("./controller");
 const { success, error } = require("./messagesResponses");
 
 router.get("/", (req, res) => {
@@ -40,6 +45,17 @@ router.patch("/:messageid", (req, res) => {
       error(req, res, "internal error", 500);
     });
   //res.send(req.params.id);
+});
+
+router.delete("/:messageid", (req, res) => {
+  const id  = req.params.messageid;
+  deleteMessage(id)
+    .then((responseData) => {
+      success(req, res, responseData, 200);
+    })
+    .catch((err) => {
+      error(req, res, err, 500);
+    });
 });
 
 module.exports = router;
