@@ -4,10 +4,12 @@ const { createMessage, getMessages, updateMessage } = require("./controller");
 const { success, error } = require("./messagesResponses");
 
 router.get("/", (req, res) => {
-  // res.header({
-  //   "custom-header": "Valor personalizado",
-  // });
-  getMessages()
+  res.header({
+    "custom-header": "Valor personalizado",
+  });
+  console.log(req.query.user);
+  const filterMessages = req.query.user || null;
+  getMessages(filterMessages)
     .then((messageList) => {
       success(req, res, messageList, 200);
     })
@@ -35,7 +37,7 @@ router.patch("/:messageid", (req, res) => {
       success(req, res, restponseData, 202);
     })
     .catch((err) => {
-      error(req, res, 'internal error', 500);
+      error(req, res, "internal error", 500);
     });
   //res.send(req.params.id);
 });

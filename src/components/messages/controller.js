@@ -17,9 +17,11 @@ const createMessage = (user, message) => {
     resolve(fullMessage);
   });
 };
-const getMessages = () => {
+
+const getMessages = (filterUser) => {
+  console.log(filterUser);
   return new Promise((resolve, reject) => {
-    resolve(store.list());
+    resolve(store.list(filterUser));
   });
 };
 

@@ -20,9 +20,16 @@ const addMessage = (message) => {
   parsedMessage.save();
 };
 
-const getMessages = async () => {
-  const allMessages = await Model.find(); //No params to get all messages
-  return allMessages;
+const getMessages = async (filterUser) => {
+  let filter = {};
+  if (filterUser != null) {
+    filter = { user: filterUser };
+    const allMessages = await Model.find(filter); //No params to get all messages
+    return allMessages;
+  } else {
+    const allMessages = await Model.find(); //No params to get all messages
+    return allMessages;
+  }
 };
 
 const updateMessage = async (messageid, newTextMessage) => {
