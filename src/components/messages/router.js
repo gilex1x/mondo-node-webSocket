@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const { success, error } = require("../network/responses");
 const {
   createMessage,
   getMessages,
   updateMessage,
   deleteMessage,
 } = require("./controller");
-const { success, error } = require("./messagesResponses");
 
 router.get("/", (req, res) => {
   res.header({
@@ -27,7 +27,7 @@ router.post("/", (req, res) => {
   const { user, message } = req.body;
   createMessage(user, message)
     .then((fullMessage) => {
-      success(req, res, `${fullMessage} Created`, 200);
+      success(req, res, `${fullMessage} Created`, 201);
     })
     .catch(() => {
       error(req, res);
@@ -48,7 +48,7 @@ router.patch("/:messageid", (req, res) => {
 });
 
 router.delete("/:messageid", (req, res) => {
-  const id  = req.params.messageid;
+  const id = req.params.messageid;
   deleteMessage(id)
     .then((responseData) => {
       success(req, res, responseData, 200);
