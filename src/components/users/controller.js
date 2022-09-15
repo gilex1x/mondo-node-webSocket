@@ -1,5 +1,11 @@
 const store = require("./store");
 
+const getUsers = (userName) => {
+  return new Promise((resolve, reject) => {
+    resolve(store.list(userName));
+  });
+};
+
 const createUser = (userName) => {
   return new Promise((resolve, reject) => {
     console.log(userName);
@@ -16,4 +22,4 @@ const createUser = (userName) => {
   });
 };
 
-module.exports = { createUser };
+module.exports = { createUser, getUsers };

@@ -1,9 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const { success, error } = require("../network/responses");
-const { createUser } = require("./controller");
+const { createUser, getUsers } = require("./controller");
 
-router.get("/", (req, res) => {});
+router.get("/", (req, res) => {
+  const userName = req.query.userName || null;
+  getUsers(userName)
+    .then((usersList) => success(req, res, usersList, 200))
+    .catch((err) => error(req, res, err, 500));
+});
 
 router.post("/", (req, res) => {
   const { userName } = req.body;
