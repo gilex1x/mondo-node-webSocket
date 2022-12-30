@@ -1,6 +1,8 @@
 //functions and logic messgaes
 const store = require("./store");
-const createMessage = (user, message) => {
+
+
+const createMessage = async (user, message) => {
   return new Promise((resolve, reject) => {
     if (!user || !message) {
       console.error("falta user o message");
@@ -12,16 +14,19 @@ const createMessage = (user, message) => {
       message: message,
       date: new Date(),
     };
-    console.log(fullMessage);
-    store.add(fullMessage);
-    resolve(fullMessage);
+
+    store.add(fullMessage)
+      .then(res => resolve(res))
+      .catch(err => reject(err));
   });
 };
 
 const getMessages = (filterUser) => {
   console.log(filterUser);
   return new Promise((resolve, reject) => {
-    resolve(store.list(filterUser));
+    store.list(filterUser)
+      .then(res => resolve(res))
+      .catch(err => reject(err))
   });
 };
 
@@ -31,8 +36,9 @@ const updateMessage = (messageid, newTextMessage) => {
       reject("Incomplete data");
       return false;
     }
-    const result = await store.update(messageid, newTextMessage);
-    resolve(result);
+    store.update(messageid, newTextMessage)
+      .then(res => resolve(res))
+      .catch(err => reject(err))
   });
 };
 
@@ -42,10 +48,10 @@ const deleteMessage = (messageid) => {
       reject("No id provided");
       return false;
     }
-    store
-      .delete(messageid)
-      .then(() => resolve())
-      .catch((err) => console.error(err));
+
+    store.delete(messageid)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
   });
 };
 

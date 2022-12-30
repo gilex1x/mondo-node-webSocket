@@ -2,9 +2,9 @@
 const Model = require("./model");
 
 
-const addMessage = (message) => {
+const addMessage = async (message) => {
   //messageList.push(message);
-  const parsedMessage = new Model(message);
+  const parsedMessage = await new Model(message);
   console.log(parsedMessage);
   parsedMessage.save();
 };
@@ -29,7 +29,7 @@ const updateMessage = async (messageid, newTextMessage) => {
 };
 
 const deleteMessage = async (messageid) => {
-  return Model.deleteOne({ _id: messageid });
+  return await Model.deleteOne({ _id: messageid });
 };
 
 module.exports = {

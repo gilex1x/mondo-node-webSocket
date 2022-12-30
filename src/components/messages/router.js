@@ -14,6 +14,7 @@ router.get("/", (req, res) => {
   });
   console.log(req.query.user);
   const filterMessages = req.query.user || null;
+  //Filtramos por id de usuario
   getMessages(filterMessages)
     .then((messageList) => {
       success(req, res, messageList, 200);
