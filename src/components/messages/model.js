@@ -3,7 +3,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const messagesSchema = new Schema({
-  user: String,//User id
+  user:{
+    type: Schema.ObjectId,
+    ref: 'user'
+  },//User id
   message: String,
   date: Date,
 });

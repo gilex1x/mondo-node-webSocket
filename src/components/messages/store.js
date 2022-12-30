@@ -5,20 +5,40 @@ const Model = require("./model");
 const addMessage = async (message) => {
   //messageList.push(message);
   const parsedMessage = await new Model(message);
-  console.log(parsedMessage);
   parsedMessage.save();
 };
 
 const getMessages = async (filterUser) => {
   let filter = {};
-  if (filterUser != null) {
-    filter = { user: filterUser };
-    const allMessages = await Model.find(filter); //No params to get all messages
-    return allMessages;
-  } else {
-    const allMessages = await Model.find(); //No params to get all messages
-    return allMessages;
-  }
+  return new Promise((resolve, reject) => {
+    if (filterUser != null) {
+      filter = { user: filterUser };
+      Model.find(filter)
+        .populate('user')
+        .exec((err, populatedData) => {
+          if (err) {
+            console.log(err)
+            reject(err)
+            return false
+          }
+          resolve(populatedData)
+        }) //No params to get all messages
+
+    } else {
+      Model.find() //No params to get all messages
+        .populate('user')
+        .exec((err, populatedData) => {
+          if (err) {
+            console.log(err)
+            reject(err)
+            return false
+          }
+          resolve(populatedData)
+        })
+
+    }
+
+  })
 };
 
 const updateMessage = async (messageid, newTextMessage) => {
@@ -29,7 +49,7 @@ const updateMessage = async (messageid, newTextMessage) => {
 };
 
 const deleteMessage = async (messageid) => {
-  return await Model.deleteOne({ _id: messageid });
+  return Model.deleteOne({ _id: messageid });
 };
 
 module.exports = {

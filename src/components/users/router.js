@@ -21,8 +21,9 @@ router.post("/", (req, res) => {
     });
 });
 
-router.patch("/:userid", (req, res) => { });
+router.patch("/:userid", (req, res) =>  error(req,res,'Method Not Allowed',405)
+ );
 
-router.delete("/:userid", (req, res) => { });
+router.delete("/:userid", (req, res) => error(req,res,'Method Not Allowed',405));
 
 module.exports = router;

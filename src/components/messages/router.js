@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
       success(req, res, messageList, 200);
     })
     .catch((err) => {
-      error(req, res, "Unexpected error", 500);
+      error(req, res, err, 500);
     });
 });
 
@@ -30,8 +30,8 @@ router.post("/", (req, res) => {
     .then((fullMessage) => {
       success(req, res, `${fullMessage} Created`, 201);
     })
-    .catch(() => {
-      error(req, res);
+    .catch((err) => {
+      error(req, res,err);
     });
 });
 

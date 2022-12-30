@@ -2,8 +2,8 @@
 const store = require("./store");
 
 
-const createMessage = async (user, message) => {
-  return new Promise((resolve, reject) => {
+const createMessage =  (user, message) => {
+  return  new Promise((resolve, reject) => {
     if (!user || !message) {
       console.error("falta user o message");
       reject("Datos incorrectos");
@@ -16,7 +16,7 @@ const createMessage = async (user, message) => {
     };
 
     store.add(fullMessage)
-      .then(res => resolve(res))
+      .then(res => resolve(fullMessage))
       .catch(err => reject(err));
   });
 };
