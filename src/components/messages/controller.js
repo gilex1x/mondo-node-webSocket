@@ -22,7 +22,6 @@ const createMessage = async (user, message) => {
 };
 
 const getMessages = (filterUser) => {
-  console.log(filterUser);
   return new Promise((resolve, reject) => {
     store.list(filterUser)
       .then(res => resolve(res))

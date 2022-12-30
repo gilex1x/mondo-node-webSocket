@@ -12,10 +12,10 @@ router.get("/", (req, res) => {
   res.header({
     "custom-header": "Valor personalizado",
   });
-  console.log(req.query.user);
-  const filterMessages = req.query.user || null;
+  console.log(req.query.userId);
+  const {userId} = req.query || null;
   //Filtramos por id de usuario
-  getMessages(filterMessages)
+  getMessages(userId)
     .then((messageList) => {
       success(req, res, messageList, 200);
     })
