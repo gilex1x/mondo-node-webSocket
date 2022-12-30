@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
   const userName = req.query.userName || null;
   getUsers(userName)
     .then((usersList) => success(req, res, usersList, 200))
-    .catch((err) => error(req, res, err, 500));
+    .catch((err) => { console.log(err);error(req, res, err, 500) });
 });
 
 router.post("/", (req, res) => {
@@ -21,8 +21,8 @@ router.post("/", (req, res) => {
     });
 });
 
-router.patch("/:userid", (req, res) => {});
+router.patch("/:userid", (req, res) => { });
 
-router.delete("/:userid", (req, res) => {});
+router.delete("/:userid", (req, res) => { });
 
 module.exports = router;

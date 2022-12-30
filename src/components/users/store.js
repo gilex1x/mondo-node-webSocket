@@ -1,4 +1,4 @@
-const db = require("mongoose");
+
 const Model = require("./model");
 
 const getUsers = async (userName) => {
@@ -13,8 +13,8 @@ const getUsers = async (userName) => {
   }
 };
 
-const addUser = (user) => {
-  const parsedUser = new Model(user);
+const addUser = async(user) => {
+  const parsedUser = await new Model(user);
   return parsedUser.save();
 };
 
