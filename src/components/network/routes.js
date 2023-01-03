@@ -2,6 +2,7 @@
 const db = require("mongoose");
 const messageRouter = require("../messages/router");
 const usersRouter = require("../users/router");
+const chatRouter = require('../chat/router')
 const dotenv = require("dotenv");
 dotenv.config();
 //console.log(process.env.DB_USER);
@@ -17,6 +18,7 @@ db.connect(uriDb, { useNewUrlParser: true }, (err) => {
 const router = (server) => {
   server.use("/messages", messageRouter);
   server.use("/users", usersRouter);
+  server.use("/chat", chatRouter)
 };
 
 module.exports = { router };

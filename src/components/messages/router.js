@@ -25,8 +25,8 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { user, message } = req.body;
-  createMessage(user, message)
+  const { user, message,chatId } = req.body;
+  createMessage(user, message,chatId)
     .then((fullMessage) => {
       success(req, res, `${fullMessage} Created`, 201);
     })
