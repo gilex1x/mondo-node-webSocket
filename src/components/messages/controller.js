@@ -1,4 +1,5 @@
 //functions and logic messgaes
+const { socket } = require("../../socket");
 const store = require("./store");
 
 
@@ -10,14 +11,17 @@ const createMessage = (user, message, chatId) => {
       return false;
     }
     const fullMessage = {
-      chat:chatId,
+      chat: chatId,
       user: user,
       message: message,
       date: new Date(),
     };
 
     store.add(fullMessage)
-      .then(res => resolve(fullMessage))
+      .then(res => {
+        socket.io.emit('message', fullMessage)
+        resolve(fullMessage)
+      })
       .catch(err => reject(err));
   });
 };
